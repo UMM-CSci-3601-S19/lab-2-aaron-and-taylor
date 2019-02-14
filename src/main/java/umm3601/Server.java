@@ -3,8 +3,11 @@ package umm3601;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
+import umm3601.todo.TodoController;
 import umm3601.user.Database;
 import umm3601.user.UserController;
+import umm3601.todo.TodoDatabase;
+
 
 import java.io.IOException;
 
@@ -53,6 +56,11 @@ public class Server {
     // There's a similar "before" method that can be used to modify requests
     // before they they're processed by things like `get`.
     after("*", addGzipHeader);
+
+    // Get specific todo
+    get("api/todo/:id", TodoController::getToDo);
+    // List todos, filtered using query parameters
+    get("api/todo", TodoController::getToDos);
   }
 
   /***
