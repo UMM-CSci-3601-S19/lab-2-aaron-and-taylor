@@ -37,17 +37,26 @@ public class TodoDatabase {
   public ToDo[] listTodos(Map<String, String[]> queryParams) {
     ToDo[] filteredtodos = allTodos;
 
-    // Filter age if defined
+    // Filter status if defined
     if (queryParams.containsKey("status")) {
-      boolean targetStatus = Boolean.parseBoolean(queryParams.get("status")[0]);
+      String targetStatus = queryParams.get("status")[0];
       filteredtodos = filterTodosByStatus(filteredtodos, targetStatus);
     }
 
     return filteredtodos;
+
+
   }
 
   ///////going to filter by status
-  public ToDo[] filterTodosByStatus(ToDo[] todos, boolean targetStatus) {
-    return Arrays.stream(todos).filter(x -> x.status == targetStatus).toArray(ToDo[]::new);
+  public ToDo[] filterTodosByStatus(ToDo[] todos, String targetStatus) {
+    if(targetStatus.equals("complete")) {
+      return Arrays.stream(todos).filter(x -> x.status == true).toArray(ToDo[]::new);
+    }
+    else if(targetStatus.equals("incomplete")) {
+      return Arrays.stream(todos).filter(x -> x.status == false).toArray(ToDo[]::new);
+    }
+    else{return todos;}
   }
+
 }
