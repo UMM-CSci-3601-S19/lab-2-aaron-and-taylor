@@ -37,6 +37,23 @@ function getAlllimitTodo() {
   });
 }
 
+function getAllToDoByOwner() {
+  console.log("Getting all todos by owner");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todo?owner=" + document.getElementById("owner").value, function (returned_json) {
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+function getAllToDoByCategory() {
+  console.log("Getting all todos by category");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todo?category=" + document.getElementById("category").value, function (returned_json) {
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
 
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved

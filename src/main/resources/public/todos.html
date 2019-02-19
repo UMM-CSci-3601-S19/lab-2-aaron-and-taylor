@@ -23,6 +23,12 @@
 <label for="contains">contains:</label><input id="contains" name="contains">
 <button type="button" id="ToDoContains"> get todo by string contained in bodies</button>
 
+<label for="owner">owner:</label><input id="owner" name="owner">
+<button type="button" id="getToDoByOwner"> get todo by owner</button>
+
+<label for="category">category:</label><input id="category" name="category">
+<button type="button" id="getToDoByCategory"> get todo by category</button>
+
 <script>
   window.onload = function () {
     console.log("The page is loaded now!");
@@ -38,7 +44,13 @@
 
     element = document.getElementById('ToDoContains');
     element.addEventListener("click", getAllToDoContains, true);
-  }
+
+    element = document.getElementById('getToDoByOwner');
+    element.addEventListener("click", getAllToDoByOwner, true);
+
+    element = document.getElementById('getToDoByCategory');
+    element.addEventListener("click", getAllToDoByCategory, true);
+   }
 </script>
 </body>
 </html>
