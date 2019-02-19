@@ -43,20 +43,38 @@ public class TodoDatabase {
       filteredtodos = filterTodosByStatus(filteredtodos, targetStatus);
     }
 
+    if (queryParams.containsKey("contains")) {
+      String targetBody = queryParams.get("contains")[0];
+      filteredtodos = filterTodosByBody(filteredtodos, targetBody);
+    }
+
+    if (queryParams.containsKey("limit")) {
+      int targetLimit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredtodos = limitTodos(filteredtodos, targetLimit);
+    }
     return filteredtodos;
 
-
   }
 
-  ///////going to filter by status
+  ///////filtering by status
   public ToDo[] filterTodosByStatus(ToDo[] todos, String targetStatus) {
-    if(targetStatus.equals("complete")) {
-      return Arrays.stream(todos).filter(x -> x.status == true).toArray(ToDo[]::new);
+    if (targetStatus.equals("complete")) {
+      return Arrays.stream(todos).filter(x -> x.status).toArray(ToDo[]::new);
+    } else if (targetStatus.equals("incomplete")) {
+      return Arrays.stream(todos).filter(x -> !x.status).toArray(ToDo[]::new);
+    } else {
+      return todos;
     }
-    else if(targetStatus.equals("incomplete")) {
-      return Arrays.stream(todos).filter(x -> x.status == false).toArray(ToDo[]::new);
-    }
-    else{return todos;}
   }
+///////filtering by search string
+  public ToDo[] filterTodosByBody(ToDo[] todos, String targetBody) {
+      return Arrays.stream(todos).filter(x -> x.body.contains(targetBody)).toArray(ToDo[]::new);
+    }
 
+  public ToDo[] limitTodos(ToDo[] tempTodos, int lim) {
+    ToDo[] limitTodos;
+      limitTodos= Arrays.stream(tempTodos).limit(lim).toArray(ToDo[]::new);
+    return limitTodos;
+  }
 }
+

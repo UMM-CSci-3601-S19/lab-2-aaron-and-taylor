@@ -39,6 +39,7 @@ public class Server {
     // Redirects to create simpler URLs
     redirect.get("/about", "/about.html");
     redirect.get("/users", "/users.html");
+    redirect.get("/todos", "/todos.html");
 
     // API endpoints
 
@@ -72,7 +73,13 @@ public class Server {
    *
    * Constructing the controller might throw an IOException if
    * there are problems reading from the JSON "database" file.
-   * If that happens we'll print out an error message and shut
+   * If that happens we'll print out an error mepublic JsonObject getToDoLimit(Request req, Response res){///////////////////////
+    res.type("application/json");
+    ToDo[] todo = TodoDatabase.listTodos(req.queryMap().toMap());
+
+    return buildSuccessJsonResponse("todo", gson.toJsonTree(todo));
+
+  }ssage and shut
    * the server down.
    * @throws IOException if we can't open or read the user data file
    */

@@ -19,6 +19,25 @@ function getAllToDoByStatus() {
   });
 }
 
+function getAllToDoContains() {
+  console.log("Getting all the todos with the searched word.");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todo?contains=" + document.getElementById("contains").value, function (returned_json) {
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+function getAlllimitTodo() {
+  console.log("Limiting list size of todos");
+
+  var HttpThingy = new HttpClient();
+  HttpThingy.get("/api/todo?limit=" + document.getElementById("limit").value, function (returned_json) {
+    document.getElementById('jsonDump').innerHTML = returned_json;
+  });
+}
+
+
 /**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.
