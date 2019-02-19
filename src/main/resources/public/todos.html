@@ -13,8 +13,15 @@
 
 <div id="jsonDump" style="margin-top:20px"> Json will go here</div>
 
+<label for="limit">limit:</label><input id="limit" name="limit">
+<button type="button" id="limitToDo"> Limit the todos return</button>
+
 <label for="status">status:</label><input id="status" name="status">
 <button type="button" id="getToDoByStatus"> get todo by status</button>
+
+
+<label for="contains">contains:</label><input id="contains" name="contains">
+<button type="button" id="ToDoContains"> get todo by string contained in bodies</button>
 
 <script>
   window.onload = function () {
@@ -25,6 +32,9 @@
 
     element = document.getElementById('getToDoByStatus');
     element.addEventListener("click", getAllToDoByStatus, true);
+
+    element = document.getElementById('ToDoContains');
+    element.addEventListener("click", getAllToDoContains, true);
   }
 </script>
 </body>
